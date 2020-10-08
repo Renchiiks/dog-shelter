@@ -33,4 +33,10 @@ public class ShelterController {
         modelAndView.addObject(shelter);
         return modelAndView;
     }
+
+    @RequestMapping("removeShelter")
+    public String removeShelter(Long id) {
+        shelterRepository.delete(shelterRepository.findById(id).orElseThrow());
+        return "shelter/shelter";
+    }
 }

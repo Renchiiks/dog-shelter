@@ -5,17 +5,24 @@
     <title>Dog</title>
 </head>
 <body>
-<form action="addDog">
+<form action="dog">
     <input title="name" th:type="text" name="name">Name<br>
     <input title="breed" th:type="text" name="breed">Breed<br>
     <input title="age" th:type="text" name="age">Age<br>
-    <input th:type="submit"><br>
+    <input title="Add Dog" th:type="submit">Add dog<br>
 <!--    <input th:type="text" type="shelter.name"><br>-->
 </form>
 <form action="getDog">
     <input title="Id" th:type="text" name="id">Id<br>
-    <input th:type="submit"><br>
+    <input title="Find Dog" th:type="submit">Find Dog<br>
     <!--    <input th:type="text" type="shelter.name"><br>-->
 </form>
+
+<form action="removeDog">
+    <input title="Id" th:type="text" name="id">Id<br>
+    <input title="Remove dog" th:type="submit">Remove Dog<br>
+    <!--    <input th:type="text" type="shelter.name"><br>-->
+</form>
+
 </body>
 </html>

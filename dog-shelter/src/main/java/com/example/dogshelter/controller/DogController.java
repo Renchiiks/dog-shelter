@@ -22,7 +22,7 @@ public class DogController {
         this.dogRepository = dogRepository;
     }
 
-    @RequestMapping("/addDog")
+    @RequestMapping("/dog")
     public String addDog(Dog dog) {
         dogRepository.save(dog);
         return "dog/dog";
@@ -34,5 +34,11 @@ public class DogController {
         Dog dog = dogRepository.findById(id).orElse(new Dog());
         modelAndView.addObject(dog);
         return modelAndView;
+    }
+
+    @RequestMapping("/removeDog")
+    public String removeDog(Long id) {
+        dogRepository.delete(dogRepository.findById(id).orElseThrow());
+        return "dog/dog";
     }
 }
