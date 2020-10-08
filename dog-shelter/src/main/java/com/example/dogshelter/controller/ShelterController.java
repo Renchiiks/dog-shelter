@@ -26,12 +26,25 @@ public class ShelterController {
         return "shelter/shelter";
     }
 
-    @RequestMapping("getShelter")
-    public ModelAndView getShelter(@RequestParam Long id) {
+    @RequestMapping("getShelterById")
+    public ModelAndView getShelterById(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("shelter/showShelter");
         Shelter shelter = shelterRepository.findById(id).orElse(new Shelter());
         modelAndView.addObject(shelter);
         return modelAndView;
+    }
+
+    @RequestMapping("getShelterByName")
+    public ModelAndView getShelterByName(@RequestParam String name) {
+        ModelAndView modelAndView = new ModelAndView("shelter/showShelter");
+        Iterable<Shelter> shelters = shelterRepository.findAll();
+        for (Shelter shelter : shelters) {
+            if (shelter.getName().equals(name)) {
+                modelAndView.addObject(shelter);
+                return modelAndView;
+            }
+        }
+        return null;
     }
 
     @RequestMapping("removeShelter")

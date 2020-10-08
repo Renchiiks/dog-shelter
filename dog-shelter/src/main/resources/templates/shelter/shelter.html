@@ -8,16 +8,21 @@
 <form action="shelter">
     <input title="Name" th:type="text" name="name">Name<br>
     <input title="Address" th:type="text" name="address">Address<br>
-    <input th:type="submit"><br>
+    <input th:type="submit">Add Shelter<br>
 </form>
-<form action="getShelter">
+<form action="getShelterById">
     <input title="Id" th:type="text" name="id">Id<br>
-    <input th:type="submit"><br>
+    <input th:type="submit">Find By Id<br>
+    <!--    <input th:type="text" type="shelter.name"><br>-->
+</form>
+<form action="getShelterByName">
+    <input title="Name" th:type="text" name="name">Name<br>
+    <input th:type="submit">Find By Name<br>
     <!--    <input th:type="text" type="shelter.name"><br>-->
 </form>
 <form action="removeShelter">
     <input title="Id" th:type="text" name="id">Id<br>
-    <input th:type="submit"><br>
+    <input th:type="submit">Remove Shelter<br>
     <!--    <input th:type="text" type="shelter.name"><br>-->
 </form>
 </body>
