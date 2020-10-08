@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="shelter">
+    <input title="Name" th:type="text" name="name">Name<br>
+    <input title="Address" th:type="text" name="address">Address<br>
+    <input th:type="submit"><br>
+</form>
+<form action="getShelter">
+    <input title="Id" th:type="text" name="id">Id<br>
+    <input th:type="submit"><br>
+    <!--    <input th:type="text" type="shelter.name"><br>-->
+</form>
+</body>
+</html>

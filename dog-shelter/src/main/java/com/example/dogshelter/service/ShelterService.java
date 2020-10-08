@@ -10,7 +10,15 @@ import java.util.Optional;
 @Service
 public class ShelterService {
 
-    private ShelterRepository shelterRepository;
+    private final ShelterRepository shelterRepository;
+
+    public ShelterService(ShelterRepository shelterRepository) {
+        this.shelterRepository = shelterRepository;
+    }
+
+    public Optional<Shelter> findById(Long id) {
+        return shelterRepository.findById(id);
+    }
 
     public void addShelter(Shelter shelter) {
         shelterRepository.save(shelter);
@@ -18,10 +26,6 @@ public class ShelterService {
 
     public void removeShelter(Shelter shelter) {
         shelterRepository.delete(shelter);
-    }
-
-    public Optional<Shelter> findById(Long id) {
-        return shelterRepository.findById(id);
     }
 
     public Object findByName(String name) {

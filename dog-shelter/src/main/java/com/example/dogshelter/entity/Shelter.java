@@ -2,7 +2,6 @@ package com.example.dogshelter.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -19,8 +18,7 @@ public class Shelter {
     public Shelter() {
     }
 
-    public Shelter(Long id, String name, String address) {
-        this.id = id;
+    public Shelter( String name, String address) {
         this.name = name;
         this.address = address;
     }
@@ -65,16 +63,4 @@ public class Shelter {
                 ", address='" + address;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Shelter shelter = (Shelter) o;
-        return Objects.equals(id, shelter.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

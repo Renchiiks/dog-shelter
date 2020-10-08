@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dog</title>
+</head>
+<body>
+<form action="addDog">
+    <input title="name" th:type="text" name="name">Name<br>
+    <input title="breed" th:type="text" name="breed">Breed<br>
+    <input title="age" th:type="text" name="age">Age<br>
+    <input th:type="submit"><br>
+<!--    <input th:type="text" type="shelter.name"><br>-->
+</form>
+<form action="getDog">
+    <input title="Id" th:type="text" name="id">Id<br>
+    <input th:type="submit"><br>
+    <!--    <input th:type="text" type="shelter.name"><br>-->
+</form>
+</body>
+</html>

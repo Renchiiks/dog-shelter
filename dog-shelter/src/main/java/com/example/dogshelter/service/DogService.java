@@ -9,18 +9,22 @@ import java.util.Optional;
 @Service
 public class DogService {
 
-    private DogRepository dogRepository;
+    private final DogRepository dogRepository;
+
+    public DogService(DogRepository dogRepository) {
+        this.dogRepository = dogRepository;
+    }
 
     public void addDog(Dog dog) {
         dogRepository.save(dog);
     }
 
-    public void removeDog(Dog dog) {
-        dogRepository.delete(dog);
-    }
-
     public Optional<Dog> findById(Long id) {
         return dogRepository.findById(id);
+    }
+
+    public void removeDog(Dog dog) {
+        dogRepository.delete(dog);
     }
 
 }
