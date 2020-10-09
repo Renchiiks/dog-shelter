@@ -53,4 +53,6 @@ public class ShelterController {
         shelterRepository.delete(shelterRepository.findById(id).orElseThrow());
         return "shelter/home";
     }
+
+
 }

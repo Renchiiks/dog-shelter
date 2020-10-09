@@ -9,6 +9,11 @@
     <input title="name" th:type="text" name="name">Name<br>
     <input title="breed" th:type="text" name="breed">Breed<br>
     <input title="age" th:type="text" name="age">Age<br>
+    <select title="sbShelter" class="form-control" th:field="${shelter}">
+        <option th:each="r: ${shelter}" th:value="${r.id}" th:text="${r.getName()}">
+           Shelter
+        </option>
+    </select>
     <input title="Add Dog" th:type="submit">Add dog<br>
 <!--    <input th:type="text" type="shelter.name"><br>-->
 </form>
