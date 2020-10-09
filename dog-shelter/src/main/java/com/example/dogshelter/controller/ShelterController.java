@@ -20,10 +20,11 @@ public class ShelterController {
     //    public ShelterController(ShelterService shelterService) {
 //        this.shelterService = shelterService;
 //    }
+
     @RequestMapping("/shelter")
     public String addShelter(Shelter shelter) {
         shelterRepository.save(shelter);
-        return "shelter/shelter";
+        return "shelter/home";
     }
 
     @RequestMapping("getShelterById")
@@ -50,6 +51,6 @@ public class ShelterController {
     @RequestMapping("removeShelter")
     public String removeShelter(Long id) {
         shelterRepository.delete(shelterRepository.findById(id).orElseThrow());
-        return "shelter/shelter";
+        return "shelter/home";
     }
 }

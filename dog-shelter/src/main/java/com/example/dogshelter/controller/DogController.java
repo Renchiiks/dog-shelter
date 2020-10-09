@@ -25,7 +25,7 @@ public class DogController {
     @RequestMapping("/dog")
     public String addDog(Dog dog) {
         dogRepository.save(dog);
-        return "dog/dog";
+        return "dog/home";
     }
 
     @RequestMapping("/getDog")
@@ -39,6 +39,6 @@ public class DogController {
     @RequestMapping("/removeDog")
     public String removeDog(Long id) {
         dogRepository.delete(dogRepository.findById(id).orElseThrow());
-        return "dog/dog";
+        return "dog/home";
     }
 }
