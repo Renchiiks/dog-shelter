@@ -1,6 +1,7 @@
 package com.example.dogshelter.controller;
 
 import com.example.dogshelter.entity.Dog;
+import com.example.dogshelter.entity.Shelter;
 import com.example.dogshelter.repository.DogRepository;
 import com.example.dogshelter.repository.ShelterRepository;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Controller
 public class DogController {
@@ -26,8 +30,10 @@ public class DogController {
         this.shelterRepository = shelterRepository;
     }
 
+    @Transactional
     @RequestMapping("/dog")
-    public String addDog( Dog dog, Model model) {
+    public String addDog(Dog dog, Shelter shelter, Model model) {
+        dog.setShelter(shelter);
         model.addAttribute("shelter", shelterRepository.findAll());
         model.addAttribute("dog", dog);
         dogRepository.save(dog);
@@ -48,12 +54,12 @@ public class DogController {
         return "dog/home";
     }
 
-    @RequestMapping("/getDog")
-    public ModelAndView findDogsByShelterId(@RequestParam Long id) {
-        ModelAndView modelAndView = new ModelAndView("dog/showDog");
-        Dog dog = dogRepository.findById(id).orElse(new Dog());
-        modelAndView.addObject(dog);
-        return modelAndView;
+    @RequestMapping("/getDogs")
+    public String findDogsByShelterId(@RequestParam Long id, Model model) {
+        Shelter shelter = shelterRepository.findById(id).orElseThrow();
+        List<Dog> dogs = dogRepository.findByShelter(shelter);
+        model.addAttribute("dogs", dogs);
+        return "dog/showDogsByShelter";
     }
 
 

@@ -10,7 +10,7 @@ public class Dog {
     private String name;
     private String breed;
     private int age;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Shelter shelter;
 
     public Dog() {
