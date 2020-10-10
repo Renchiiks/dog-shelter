@@ -9,7 +9,7 @@
     <input title="name" th:type="text" name="name">Name<br>
     <input title="breed" th:type="text" name="breed">Breed<br>
     <input title="age" th:type="text" name="age">Age<br>
-    <select title="Shelter" class="form-control"  name="shelter">
+    <select title="Shelter" name="shelter">
         <option th:each="sh: ${shelters}" th:value="${sh.id}" th:text="${sh.getName()}">
            Shelter
         </option>
