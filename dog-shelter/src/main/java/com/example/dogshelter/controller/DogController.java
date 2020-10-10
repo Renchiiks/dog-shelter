@@ -8,9 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Controller
@@ -30,14 +28,18 @@ public class DogController {
         this.shelterRepository = shelterRepository;
     }
 
-    @Transactional
-    @RequestMapping("/dog")
-    public String addDog(Dog dog, Shelter shelter, Model model) {
-        if(dog != null){
+    @RequestMapping("/dog-home")
+    public String dog(Model model) {
+        model.addAttribute("shelters", shelterRepository.findAll());
+        return "dog/home";
 
-            dog.setShelter(shelter);
-            model.addAttribute("shelter", shelterRepository.findAll());
-            model.addAttribute("dog", dog);
+    }
+
+    @RequestMapping("/dog")
+    public String addDog( Dog dog, Model model) {
+        if (dog != null) {
+            model.addAttribute("shelters", shelterRepository.findAll());
+            model.addAttribute("dog", new Dog());
             dogRepository.save(dog);
             return "dog/home";
         }
@@ -46,11 +48,11 @@ public class DogController {
     }
 
     @RequestMapping("/getDog")
-    public ModelAndView findDog(@RequestParam Long id) {
-        ModelAndView modelAndView = new ModelAndView("dog/showDog");
+    public String findDog(@RequestParam Long id, Model model) {
+
         Dog dog = dogRepository.findById(id).orElse(new Dog());
-        modelAndView.addObject(dog);
-        return modelAndView;
+        model.addAttribute(dog);
+        return "dog/showDog";
     }
 
     @RequestMapping("/removeDog")

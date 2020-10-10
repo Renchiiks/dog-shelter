@@ -5,17 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-<tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Breed</th>
-    <th>Age</th>
-</tr>
-<tr th:each="d : ${dogs}">
-    <td th:text="${d.getId()}">ID</td>
-    <td th:text="${d.getName()}">Name</td>
-    <td th:text="${d.getBreed()}">Breed</td>
-    <td th:text="${d.getAge()}">Age</td>
-</tr>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Breed</th>
+        <th>Age</th>
+    </tr>
+    <tr th:each="d : ${dogs}">
+        <td th:text="${d.getId()}">ID</td>
+        <td th:text="${d.getName()}">Name</td>
+        <td th:text="${d.getBreed()}">Breed</td>
+        <td th:text="${d.getAge()}">Age</td>
+    </tr>
+</table>
+
 </body>
 </html>

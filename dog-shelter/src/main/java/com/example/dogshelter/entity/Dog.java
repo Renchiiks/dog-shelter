@@ -3,7 +3,6 @@ package com.example.dogshelter.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "dog")
 public class Dog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -11,8 +10,8 @@ public class Dog {
     private String name;
     private String breed;
     private int age;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "shelter_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(foreignKey = @ForeignKey(name = "shelter_id"), name = "shelter_id")
     private Shelter shelter;
 
     public Dog() {

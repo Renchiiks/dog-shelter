@@ -1,20 +1,19 @@
 package com.example.dogshelter.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "shelter")
 public class Shelter {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "shelter_id")
     private Long id;
     private String name;
     private String address;
-    @OneToMany(cascade = {CascadeType.ALL})
-    private Set<Dog> dogs = new HashSet<>();
+
+    @OneToMany(mappedBy = "shelter")
+    private List<Dog> dogs = new ArrayList<>();
 
     public Shelter() {
     }
@@ -48,12 +47,19 @@ public class Shelter {
         this.address = address;
     }
 
-    public Set<Dog> getDogs() {
+    public List<Dog> getDogs() {
         return dogs;
     }
 
-    public void setDogs(Set<Dog> dogs) {
+    public void setDogs(List<Dog> dogs) {
         this.dogs = dogs;
+    }
+
+    @PreRemove
+    private void preRemove() {
+        for (Dog dog : dogs) {
+            dog.setShelter(null);
+        }
     }
 
     @Override

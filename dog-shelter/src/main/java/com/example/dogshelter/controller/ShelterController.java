@@ -3,6 +3,8 @@ package com.example.dogshelter.controller;
 import com.example.dogshelter.entity.Shelter;
 import com.example.dogshelter.repository.ShelterRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,16 +22,22 @@ public class ShelterController {
     //    public ShelterController(ShelterService shelterService) {
 //        this.shelterService = shelterService;
 //    }
+    @RequestMapping("/shelter-home")
+    public String shelter() {
+        return "shelter/home";
+    }
 
+    @Transactional
     @RequestMapping("/shelter")
-    public String addShelter(Shelter shelter) {
-        if(shelter!= null){
+    public String addShelter(Shelter shelter, Model model) {
+        if (shelter != null) {
             shelterRepository.save(shelter);
+            model.addAttribute("shelter", shelter);
         }
         return "shelter/home";
     }
 
-    @RequestMapping("getShelterById")
+    @RequestMapping("/getShelterById")
     public ModelAndView getShelterById(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("shelter/showShelter");
         Shelter shelter = shelterRepository.findById(id).orElse(new Shelter());
@@ -37,7 +45,7 @@ public class ShelterController {
         return modelAndView;
     }
 
-    @RequestMapping("getShelterByName")
+    @RequestMapping("/getShelterByName")
     public ModelAndView getShelterByName(@RequestParam String name) {
         ModelAndView modelAndView = new ModelAndView("shelter/showShelter");
         Iterable<Shelter> shelters = shelterRepository.findAll();
@@ -50,7 +58,7 @@ public class ShelterController {
         return null;
     }
 
-    @RequestMapping("removeShelter")
+    @RequestMapping("/removeShelter")
     public String removeShelter(Long id) {
         shelterRepository.delete(shelterRepository.findById(id).orElseThrow());
         return "shelter/home";

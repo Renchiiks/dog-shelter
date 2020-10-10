@@ -8,6 +8,8 @@ public class DogShelterApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DogShelterApplication.class, args);
+
+
 	}
 
 }
