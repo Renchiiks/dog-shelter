@@ -33,11 +33,16 @@ public class DogController {
     @Transactional
     @RequestMapping("/dog")
     public String addDog(Dog dog, Shelter shelter, Model model) {
-        dog.setShelter(shelter);
-        model.addAttribute("shelter", shelterRepository.findAll());
-        model.addAttribute("dog", dog);
-        dogRepository.save(dog);
+        if(dog != null){
+
+            dog.setShelter(shelter);
+            model.addAttribute("shelter", shelterRepository.findAll());
+            model.addAttribute("dog", dog);
+            dogRepository.save(dog);
+            return "dog/home";
+        }
         return "dog/home";
+
     }
 
     @RequestMapping("/getDog")

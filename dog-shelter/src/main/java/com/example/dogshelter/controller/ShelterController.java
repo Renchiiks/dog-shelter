@@ -23,7 +23,9 @@ public class ShelterController {
 
     @RequestMapping("/shelter")
     public String addShelter(Shelter shelter) {
-        shelterRepository.save(shelter);
+        if(shelter!= null){
+            shelterRepository.save(shelter);
+        }
         return "shelter/home";
     }
 

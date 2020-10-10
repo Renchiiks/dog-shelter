@@ -5,20 +5,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "shelter")
 public class Shelter {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Column(name = "shelter_id")
     private Long id;
     private String name;
     private String address;
     @OneToMany(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "shelter_id")
     private Set<Dog> dogs = new HashSet<>();
 
     public Shelter() {
     }
 
-    public Shelter( String name, String address) {
+    public Shelter(String name, String address) {
         this.name = name;
         this.address = address;
     }
