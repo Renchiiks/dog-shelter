@@ -5,6 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-<p th:text="${shelter}" >
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+    </tr>
+    <tr>
+        <td th:text="${shelter.getId()}">ID</td>
+        <td th:text="${shelter.getName()}">Name</td>
+        <td th:text="${shelter.getAddress()}">Breed</td>
+    </tr>
+</table>
 </body>
 </html>

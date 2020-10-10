@@ -1,22 +1,19 @@
 package com.example.dogshelter.controller;
 
 import com.example.dogshelter.entity.Shelter;
-import com.example.dogshelter.repository.ShelterRepository;
+import com.example.dogshelter.service.ShelterService;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ShelterController {
 
-    //private ShelterService shelterService;
-    private ShelterRepository shelterRepository;
+    private ShelterService shelterService;
 
-    public ShelterController(ShelterRepository shelterRepository) {
-        this.shelterRepository = shelterRepository;
+    public ShelterController(ShelterService shelterService) {
+        this.shelterService = shelterService;
     }
 
     //    public ShelterController(ShelterService shelterService) {
@@ -27,40 +24,35 @@ public class ShelterController {
         return "shelter/home";
     }
 
-    @Transactional
     @RequestMapping("/shelter")
     public String addShelter(Shelter shelter, Model model) {
-        if (shelter != null) {
-            shelterRepository.save(shelter);
-            model.addAttribute("shelter", shelter);
-        }
+
+        shelterService.addShelter(shelter);
+        model.addAttribute("shelter", shelter);
+
         return "shelter/home";
     }
 
     @RequestMapping("/getShelterById")
-    public ModelAndView getShelterById(@RequestParam Long id) {
-        ModelAndView modelAndView = new ModelAndView("shelter/showShelter");
-        Shelter shelter = shelterRepository.findById(id).orElse(new Shelter());
-        modelAndView.addObject(shelter);
-        return modelAndView;
+    public String getShelterById(@RequestParam Long id, Model model) {
+
+        Shelter shelter = shelterService.findById(id);
+        model.addAttribute(shelter);
+        return "shelter/showShelter";
     }
 
     @RequestMapping("/getShelterByName")
-    public ModelAndView getShelterByName(@RequestParam String name) {
-        ModelAndView modelAndView = new ModelAndView("shelter/showShelter");
-        Iterable<Shelter> shelters = shelterRepository.findAll();
-        for (Shelter shelter : shelters) {
-            if (shelter.getName().equals(name)) {
-                modelAndView.addObject(shelter);
-                return modelAndView;
-            }
-        }
-        return null;
+    public String getShelterByName(@RequestParam  String name, Model model) {
+        Shelter shelter = shelterService.findByName(name);
+
+        model.addAttribute(shelter);
+        return "shelter/showShelter";
     }
+
 
     @RequestMapping("/removeShelter")
     public String removeShelter(Long id) {
-        shelterRepository.delete(shelterRepository.findById(id).orElseThrow());
+        shelterService.removeShelter(id);
         return "shelter/home";
     }
 }

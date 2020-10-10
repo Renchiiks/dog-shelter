@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShelterRepository extends JpaRepository<Shelter, Long> {
+
+    Shelter findByName(String name);
 }

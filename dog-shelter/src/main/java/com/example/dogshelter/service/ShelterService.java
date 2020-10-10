@@ -5,7 +5,6 @@ import com.example.dogshelter.repository.ShelterRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShelterService {
@@ -16,28 +15,25 @@ public class ShelterService {
         this.shelterRepository = shelterRepository;
     }
 
-    public Optional<Shelter> findById(Long id) {
-        return shelterRepository.findById(id);
+    public List<Shelter> shelters() {
+        return shelterRepository.findAll();
+    }
+
+    public Shelter findById(Long id) {
+        return shelterRepository.findById(id).orElse(new Shelter());
     }
 
     public void addShelter(Shelter shelter) {
         shelterRepository.save(shelter);
     }
 
-    public void removeShelter(Shelter shelter) {
+    public void removeShelter(Long id) {
+        Shelter shelter = shelterRepository.findById(id).orElseThrow();
         shelterRepository.delete(shelter);
     }
 
-    public Object findByName(String name) {
-        List<Shelter> shelters = (List<Shelter>) shelterRepository.findAll();
-        for (Shelter sh : shelters) {
-            String shelterToFInd = sh.getName();
-            if (shelterToFInd.equals(name)) {
-                Long idToFind = sh.getId();
-                return shelterRepository.findById(idToFind);
-            }
-        }
-        return null;
+    public Shelter findByName(String name) {
+        return shelterRepository.findByName(name);
     }
 
 }
