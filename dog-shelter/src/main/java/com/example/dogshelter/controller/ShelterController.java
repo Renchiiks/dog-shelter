@@ -2,6 +2,7 @@ package com.example.dogshelter.controller;
 
 import com.example.dogshelter.entity.Shelter;
 import com.example.dogshelter.service.ShelterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ public class ShelterController {
 
     private ShelterService shelterService;
 
+    @Autowired
     public ShelterController(ShelterService shelterService) {
         this.shelterService = shelterService;
     }
@@ -37,8 +39,8 @@ public class ShelterController {
         return "shelter/showShelter";
     }
 
-    @RequestMapping ("/getShelterByName")
-    public String getShelterByName(@RequestParam  String name, Model model) {
+    @RequestMapping("/getShelterByName")
+    public String getShelterByName(@RequestParam String name, Model model) {
         Shelter shelter = shelterService.findByName(name);
 
         model.addAttribute(shelter);

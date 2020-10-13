@@ -3,6 +3,7 @@ package com.example.dogshelter.controller;
 import com.example.dogshelter.entity.Dog;
 import com.example.dogshelter.service.DogService;
 import com.example.dogshelter.service.ShelterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ public class DogController {
     private DogService dogService;
     private ShelterService shelterService;
 
+    @Autowired
     public DogController(DogService dogService, ShelterService shelterService) {
         this.dogService = dogService;
         this.shelterService = shelterService;

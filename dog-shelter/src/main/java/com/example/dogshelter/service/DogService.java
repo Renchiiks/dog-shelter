@@ -4,6 +4,7 @@ import com.example.dogshelter.entity.Dog;
 import com.example.dogshelter.entity.Shelter;
 import com.example.dogshelter.repository.DogRepository;
 import com.example.dogshelter.repository.ShelterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class DogService {
     private DogRepository dogRepository;
     private ShelterRepository shelterRepository;
 
+    @Autowired
     public DogService(DogRepository dogRepository, ShelterRepository shelterRepository) {
         this.dogRepository = dogRepository;
         this.shelterRepository = shelterRepository;

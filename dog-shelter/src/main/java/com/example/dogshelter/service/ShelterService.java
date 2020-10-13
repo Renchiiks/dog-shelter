@@ -2,6 +2,7 @@ package com.example.dogshelter.service;
 
 import com.example.dogshelter.entity.Shelter;
 import com.example.dogshelter.repository.ShelterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public class ShelterService {
 
     private final ShelterRepository shelterRepository;
 
+    @Autowired
     public ShelterService(ShelterRepository shelterRepository) {
         this.shelterRepository = shelterRepository;
     }
