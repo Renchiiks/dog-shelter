@@ -5,9 +5,7 @@ import com.example.dogshelter.service.DogService;
 import com.example.dogshelter.service.ShelterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,14 +20,14 @@ public class DogController {
         this.shelterService = shelterService;
     }
 
-    @RequestMapping("/dog-home")
+    @GetMapping("/dog-home")
     public String dog(Model model) {
         model.addAttribute("shelters", shelterService.shelters());
         return "dog/home";
 
     }
 
-    @RequestMapping("/dog")
+    @PostMapping("/dog")
     public String addDog(@ModelAttribute Dog dog, Model model) {
 
         model.addAttribute("shelters", shelterService.shelters());
@@ -39,7 +37,7 @@ public class DogController {
 
     }
 
-    @RequestMapping("/getDog")
+    @GetMapping("/getDog")
     public String findDog(@RequestParam Long id, Model model) {
 
         Dog dog = dogService.findById(id);
@@ -47,13 +45,13 @@ public class DogController {
         return "dog/showDog";
     }
 
-    @RequestMapping("/removeDog")
+    @DeleteMapping("/removeDog")
     public String removeDog(Long id) {
         dogService.removeDog(id);
         return "dog/home";
     }
 
-    @RequestMapping("/getDogs")
+    @GetMapping("/getDogs")
     public String findDogsByShelterId(@RequestParam Long id, Model model) {
 
         List<Dog> dogs = dogService.findByShelter(id);

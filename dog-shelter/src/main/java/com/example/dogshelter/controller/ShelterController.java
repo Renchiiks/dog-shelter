@@ -4,8 +4,7 @@ import com.example.dogshelter.entity.Shelter;
 import com.example.dogshelter.service.ShelterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ShelterController {
@@ -16,15 +15,12 @@ public class ShelterController {
         this.shelterService = shelterService;
     }
 
-    //    public ShelterController(ShelterService shelterService) {
-//        this.shelterService = shelterService;
-//    }
-    @RequestMapping("/shelter-home")
+    @GetMapping("/shelter-home")
     public String shelter() {
         return "shelter/home";
     }
 
-    @RequestMapping("/shelter")
+    @PostMapping("/shelter")
     public String addShelter(Shelter shelter, Model model) {
 
         shelterService.addShelter(shelter);
@@ -33,7 +29,7 @@ public class ShelterController {
         return "shelter/home";
     }
 
-    @RequestMapping("/getShelterById")
+    @GetMapping("/getShelterById")
     public String getShelterById(@RequestParam Long id, Model model) {
 
         Shelter shelter = shelterService.findById(id);
@@ -41,7 +37,7 @@ public class ShelterController {
         return "shelter/showShelter";
     }
 
-    @RequestMapping("/getShelterByName")
+    @GetMapping("/getShelterByName")
     public String getShelterByName(@RequestParam  String name, Model model) {
         Shelter shelter = shelterService.findByName(name);
 
@@ -50,7 +46,7 @@ public class ShelterController {
     }
 
 
-    @RequestMapping("/removeShelter")
+    @DeleteMapping("/removeShelter")
     public String removeShelter(Long id) {
         shelterService.removeShelter(id);
         return "shelter/home";
