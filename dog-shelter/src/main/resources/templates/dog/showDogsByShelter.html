@@ -12,11 +12,11 @@
         <th>Breed</th>
         <th>Age</th>
     </tr>
-    <tr th:each="d : ${dogs}">
-        <td th:text="${d.getId()}">ID</td>
-        <td th:text="${d.getName()}">Name</td>
-        <td th:text="${d.getBreed()}">Breed</td>
-        <td th:text="${d.getAge()}">Age</td>
+    <tr th:each="dog : ${dogs}">
+        <td th:text="${dog.getId()}">ID</td>
+        <td th:text="${dog.getName()}">Name</td>
+        <td th:text="${dog.getBreed()}">Breed</td>
+        <td th:text="${dog.getAge()}">Age</td>
     </tr>
 </table>
 

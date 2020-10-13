@@ -3,9 +3,12 @@ package com.example.dogshelter.controller;
 import com.example.dogshelter.entity.Dog;
 import com.example.dogshelter.service.DogService;
 import com.example.dogshelter.service.ShelterService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -20,43 +23,44 @@ public class DogController {
         this.shelterService = shelterService;
     }
 
-    @RequestMapping("/dog-home")
+    @GetMapping("/dog-home")
     public String dog(Model model) {
         model.addAttribute("shelters", shelterService.shelters());
         return "dog/home";
 
     }
 
-    @RequestMapping("/dog")
-    public String addDog(@ModelAttribute Dog dog, Model model) {
-
-        model.addAttribute("shelters", shelterService.shelters());
-        model.addAttribute("dog", new Dog());
+    @PostMapping("/dog")
+    public ModelAndView addDog(@RequestBody Dog dog) {
+        ModelAndView modelAndView = new ModelAndView("dog/home");
+        modelAndView.addObject("shelters", shelterService.shelters());
+        modelAndView.addObject("dog", dog);
         dogService.add(dog);
-        return "dog/home";
+        return modelAndView;
 
     }
 
-    @RequestMapping("/getDog")
-    public String findDog(@RequestParam Long id, Model model) {
-
+    @GetMapping("/getDog/{id}")
+    public ModelAndView findDog(@PathVariable Long id) {
+        ModelAndView modelAndView = new ModelAndView("dog/showDog");
         Dog dog = dogService.findById(id);
-        model.addAttribute(dog);
-        return "dog/showDog";
+        modelAndView.addObject(dog);
+        return modelAndView;
     }
 
-    @RequestMapping("/removeDog")
-    public String removeDog(Long id) {
+    @DeleteMapping("/removeDog/{id}")
+    public ResponseEntity<Long> removeDog(@PathVariable Long id) {
         dogService.removeDog(id);
-        return "dog/home";
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
-    @RequestMapping("/getDogs")
-    public String findDogsByShelterId(@RequestParam Long id, Model model) {
+    @GetMapping("/getDogs/{shelterId}")
+    public ModelAndView findDogsByShelterId(@PathVariable Long shelterId) {
+        ModelAndView modelAndView = new ModelAndView("dog/showDogsByShelter");
+        List<Dog> dogs = dogService.findByShelter(shelterId);
 
-        List<Dog> dogs = dogService.findByShelter(id);
-        model.addAttribute("dogs", dogs);
-        return "dog/showDogsByShelter";
+        modelAndView.addObject("dogs", dogs);
+        return modelAndView;
     }
 
 }
