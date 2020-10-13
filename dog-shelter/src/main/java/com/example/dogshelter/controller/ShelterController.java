@@ -15,12 +15,12 @@ public class ShelterController {
         this.shelterService = shelterService;
     }
 
-    @GetMapping("/shelter-home")
+    @RequestMapping("/shelter-home")
     public String shelter() {
         return "shelter/home";
     }
 
-    @PostMapping("/shelter")
+    @RequestMapping("/shelter")
     public String addShelter(Shelter shelter, Model model) {
 
         shelterService.addShelter(shelter);
@@ -29,7 +29,7 @@ public class ShelterController {
         return "shelter/home";
     }
 
-    @GetMapping("/getShelterById")
+    @RequestMapping("/getShelterById")
     public String getShelterById(@RequestParam Long id, Model model) {
 
         Shelter shelter = shelterService.findById(id);
@@ -37,7 +37,7 @@ public class ShelterController {
         return "shelter/showShelter";
     }
 
-    @GetMapping("/getShelterByName")
+    @RequestMapping ("/getShelterByName")
     public String getShelterByName(@RequestParam  String name, Model model) {
         Shelter shelter = shelterService.findByName(name);
 
@@ -46,7 +46,7 @@ public class ShelterController {
     }
 
 
-    @DeleteMapping("/removeShelter")
+    @RequestMapping("/removeShelter")
     public String removeShelter(Long id) {
         shelterService.removeShelter(id);
         return "shelter/home";

@@ -20,14 +20,14 @@ public class DogController {
         this.shelterService = shelterService;
     }
 
-    @GetMapping("/dog-home")
+    @RequestMapping("/dog-home")
     public String dog(Model model) {
         model.addAttribute("shelters", shelterService.shelters());
         return "dog/home";
 
     }
 
-    @PostMapping("/dog")
+    @RequestMapping("/dog")
     public String addDog(@ModelAttribute Dog dog, Model model) {
 
         model.addAttribute("shelters", shelterService.shelters());
@@ -37,7 +37,7 @@ public class DogController {
 
     }
 
-    @GetMapping("/getDog")
+    @RequestMapping("/getDog")
     public String findDog(@RequestParam Long id, Model model) {
 
         Dog dog = dogService.findById(id);
@@ -45,13 +45,13 @@ public class DogController {
         return "dog/showDog";
     }
 
-    @DeleteMapping("/removeDog")
+    @RequestMapping("/removeDog")
     public String removeDog(Long id) {
         dogService.removeDog(id);
         return "dog/home";
     }
 
-    @GetMapping("/getDogs")
+    @RequestMapping("/getDogs")
     public String findDogsByShelterId(@RequestParam Long id, Model model) {
 
         List<Dog> dogs = dogService.findByShelter(id);
