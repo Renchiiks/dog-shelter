@@ -1,11 +1,11 @@
 package com.example.dogshelter.repository;
 
 import com.example.dogshelter.entity.Shelter;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ShelterRepository extends JpaRepository<Shelter, Long> {
+public interface ShelterRepository extends CrudRepository<Shelter, Long> {
 
     Shelter findByName(String name);
 }

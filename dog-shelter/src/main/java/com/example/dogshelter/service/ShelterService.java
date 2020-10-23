@@ -16,7 +16,7 @@ public class ShelterService {
     }
 
     public List<Shelter> shelters() {
-        return shelterRepository.findAll();
+        return (List<Shelter>) shelterRepository.findAll();
     }
 
     public Shelter findById(Long id) {

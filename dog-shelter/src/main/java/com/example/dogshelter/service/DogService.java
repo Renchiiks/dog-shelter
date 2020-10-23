@@ -19,13 +19,13 @@ public class DogService {
         this.shelterRepository = shelterRepository;
     }
 
-    public void add(Dog dog) {
+    public Dog add(Dog dog) {
 
-        dogRepository.save(dog);
+         return dogRepository.save(dog);
     }
 
     public Dog findById(Long id) {
-        return dogRepository.findById(id).orElseThrow();
+        return dogRepository.findById(id).orElse(null);
     }
 
     public void removeDog(Long id) {

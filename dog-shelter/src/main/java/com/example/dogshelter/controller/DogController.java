@@ -26,6 +26,7 @@ public class DogController {
     @GetMapping("/dog-home")
     public String dog(Model model) {
         model.addAttribute("shelters", shelterService.shelters());
+
         return "dog/home";
 
     }
@@ -36,6 +37,7 @@ public class DogController {
         modelAndView.addObject("shelters", shelterService.shelters());
         modelAndView.addObject("dog", dog);
         dogService.add(dog);
+
         return modelAndView;
 
     }
@@ -45,12 +47,14 @@ public class DogController {
         ModelAndView modelAndView = new ModelAndView("dog/showDog");
         Dog dog = dogService.findById(id);
         modelAndView.addObject(dog);
+
         return modelAndView;
     }
 
     @DeleteMapping("/removeDog/{id}")
     public ResponseEntity<Long> removeDog(@PathVariable Long id) {
         dogService.removeDog(id);
+
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
@@ -58,8 +62,8 @@ public class DogController {
     public ModelAndView findDogsByShelterId(@PathVariable Long shelterId) {
         ModelAndView modelAndView = new ModelAndView("dog/showDogsByShelter");
         List<Dog> dogs = dogService.findByShelter(shelterId);
-
         modelAndView.addObject("dogs", dogs);
+
         return modelAndView;
     }
 

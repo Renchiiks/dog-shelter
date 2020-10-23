@@ -53,6 +53,7 @@ public class ShelterController {
     @DeleteMapping("/removeShelter/{id}")
     public ResponseEntity<Long> removeShelter(@PathVariable Long id) {
         shelterService.removeShelter(id);
+
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }
